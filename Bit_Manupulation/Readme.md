@@ -1,0 +1,1 @@
+# Here are important questions on Bit Manipulation to help you prepare for placements. Bit manipulation is a key concept in coding interviews that helps you solve problems faster and use less memory. Practice these questions to improve your skills and get ready for your dream job!
