@@ -1,88 +1,54 @@
-//Quicksort example program in c++:
-#include<iostream>
-#include<cstdlib>
- 
-using namespace std;
- 
-// Swapping two values.
-void swap(int *a, int *b)
+#include<stdio.h>
+void swap(int* a, int* b)
 {
-	int temp; 
-	temp = *a;
+	int t = *a;
 	*a = *b;
-	*b = temp;
+	*b = t;
 }
- 
-// Partitioning the array on the basis of values at high as pivot value.
-int Partition(int a[], int low, int high)
+
+int partition (int arr[], int low, int high)
 {
-	int pivot, index, i;
-	index = low;
-	pivot = high;
- 
-	// Getting index of the pivot.
-	for(i=low; i < high; i++)
+	int pivot = arr[high];
+	int i = (low - 1);
+
+	for (int j = low; j <= high- 1; j++)
 	{
-		if(a[i] < a[pivot])
+		if (arr[j] <= pivot)
 		{
-			swap(&a[i], &a[index]);
-			index++;
+			i++;
+			swap(&arr[i], &arr[j]);
 		}
 	}
-	// Swapping value at high and at the index obtained.
-	swap(&a[pivot], &a[index]);
- 
-	return index;
+	swap(&arr[i + 1], &arr[high]);
+	return (i + 1);
 }
- 
-// Random selection of pivot.
-int RandomPivotPartition(int a[], int low, int high)
+
+void quickSort(int arr[], int low, int high)
 {
-	int pvt, n, temp;
-	n = rand();
-	// Randomizing the pivot value in the given subpart of array.
-	pvt = low + n%(high-low+1);
- 
-	// Swapping pivot value from high, so pivot value will be taken as a pivot while partitioning.
-	swap(&a[high], &a[pvt]);
- 
-	return Partition(a, low, high);
-}
- 
-int QuickSort(int a[], int low, int high)
-{
-	int pindex;
-	if(low < high)
+	if (low < high)
 	{
-		// Partitioning array using randomized pivot.
-		pindex = RandomPivotPartition(a, low, high);
-		// Recursively implementing QuickSort.
-		QuickSort(a, low, pindex-1);
-		QuickSort(a, pindex+1, high);
+
+		int pi = partition(arr, low, high);
+
+		quickSort(arr, low, pi - 1);
+		quickSort(arr, pi + 1, high);
 	}
-	return 0;
 }
- 
+
+void printArray(int arr[], int size)
+{
+	int i;
+	for (i=0; i < size; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
 int main()
 {
-	int n, i;
-	cout<<"\nEnter the number of data elements to be sorted: ";
-	cin>>n;
- 
-	int arr[n];
-	for(i = 0; i < n; i++)
-	{
-		cout<<"Enter element "<<i+1<<": ";
-		cin>>arr[i];
-	}
- 
-	QuickSort(arr, 0, n-1);
- 
-	// Printing the sorted data.
-	cout<<"\nSorted Data ";
-	for (i = 0; i < n; i++)
-        	cout<<"->"<<arr[i];
- 
+	int arr[] = {10, 7, 8, 9, 1, 5};
+	int n = sizeof(arr)/sizeof(arr[0]);
+	quickSort(arr, 0, n-1);
+	printf("Sorted array: \n");
+	printArray(arr, n);
 	return 0;
 }
-	
