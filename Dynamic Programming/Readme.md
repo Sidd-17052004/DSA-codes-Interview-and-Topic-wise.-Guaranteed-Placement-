@@ -1,0 +1,1 @@
+# Here are must-practice questions on Dynamic Programming to help you with placements. Dynamic Programming is a powerful technique used to solve complex problems by breaking them into simpler ones. Mastering these questions will help you tackle tricky interview challenges and boost your chances of landing your dream job!
